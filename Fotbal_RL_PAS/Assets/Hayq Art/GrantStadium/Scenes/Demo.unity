@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: c051fe5a20f72814f9643eb10ebbd2fc, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -381,6 +381,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5189142027513532137, guid: e33293e06862c154b83a247341c9c8a3, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: bad7bc832747e9f4389b942923edb005, type: 2}
     - target: {fileID: 6778632355985981360, guid: e33293e06862c154b83a247341c9c8a3, type: 3}
       propertyPath: m_text
       value: 9
@@ -495,7 +499,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!4 &9965219 stripped
 Transform:
@@ -3592,6 +3596,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoccerPlayerRed (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7762781385302812891, guid: 358c95d6d7539be47bd226fdb68fad84, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: bad7bc832747e9f4389b942923edb005, type: 2}
     - target: {fileID: 9055599286513668442, guid: 358c95d6d7539be47bd226fdb68fad84, type: 3}
       propertyPath: m_text
       value: Andrei
@@ -3698,7 +3706,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!4 &130331657 stripped
 Transform:
@@ -6099,6 +6107,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5189142027513532137, guid: e33293e06862c154b83a247341c9c8a3, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: bad7bc832747e9f4389b942923edb005, type: 2}
     - target: {fileID: 6778632355985981360, guid: e33293e06862c154b83a247341c9c8a3, type: 3}
       propertyPath: m_text
       value: 10
@@ -6213,7 +6225,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!4 &267693630 stripped
 Transform:
@@ -7330,6 +7342,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5189142027513532137, guid: e33293e06862c154b83a247341c9c8a3, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: bad7bc832747e9f4389b942923edb005, type: 2}
     - target: {fileID: 6778632355985981360, guid: e33293e06862c154b83a247341c9c8a3, type: 3}
       propertyPath: m_text
       value: 5
@@ -7444,7 +7460,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!4 &353165035 stripped
 Transform:
@@ -11286,7 +11302,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -14676,6 +14692,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoccerPlayerRed (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7762781385302812891, guid: 358c95d6d7539be47bd226fdb68fad84, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: bad7bc832747e9f4389b942923edb005, type: 2}
     - target: {fileID: 9055599286513668442, guid: 358c95d6d7539be47bd226fdb68fad84, type: 3}
       propertyPath: m_text
       value: Miruna
@@ -14782,7 +14802,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!4 &710684759 stripped
 Transform:
@@ -15972,6 +15992,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5189142027513532137, guid: e33293e06862c154b83a247341c9c8a3, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: bad7bc832747e9f4389b942923edb005, type: 2}
     - target: {fileID: 6778632355985981360, guid: e33293e06862c154b83a247341c9c8a3, type: 3}
       propertyPath: m_text
       value: 8
@@ -16086,7 +16110,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!4 &757749555 stripped
 Transform:
@@ -16305,6 +16329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoccerPlayerRed (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7762781385302812891, guid: 358c95d6d7539be47bd226fdb68fad84, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: bad7bc832747e9f4389b942923edb005, type: 2}
     - target: {fileID: 9055599286513668442, guid: 358c95d6d7539be47bd226fdb68fad84, type: 3}
       propertyPath: m_text
       value: Victor
@@ -16411,7 +16439,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!4 &771781625 stripped
 Transform:
@@ -19693,6 +19721,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoccerPlayerRed (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7762781385302812891, guid: 358c95d6d7539be47bd226fdb68fad84, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: bad7bc832747e9f4389b942923edb005, type: 2}
     - target: {fileID: 9055599286513668442, guid: 358c95d6d7539be47bd226fdb68fad84, type: 3}
       propertyPath: m_text
       value: Catalina
@@ -19799,7 +19831,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!4 &966433223 stripped
 Transform:
@@ -22838,6 +22870,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoccerPlayerRed
       objectReference: {fileID: 0}
+    - target: {fileID: 7762781385302812891, guid: 358c95d6d7539be47bd226fdb68fad84, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: bad7bc832747e9f4389b942923edb005, type: 2}
     - target: {fileID: 9055599286513668442, guid: 358c95d6d7539be47bd226fdb68fad84, type: 3}
       propertyPath: m_text
       value: Darius
@@ -22944,7 +22980,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!4 &1136237390 stripped
 Transform:
@@ -31163,6 +31199,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5189142027513532137, guid: e33293e06862c154b83a247341c9c8a3, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: bad7bc832747e9f4389b942923edb005, type: 2}
     - target: {fileID: 6778632355985981360, guid: e33293e06862c154b83a247341c9c8a3, type: 3}
       propertyPath: m_text
       value: 1
@@ -31277,7 +31317,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!4 &1644127169 stripped
 Transform:
@@ -32386,6 +32426,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoccerPlayerRed (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7762781385302812891, guid: 358c95d6d7539be47bd226fdb68fad84, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: bad7bc832747e9f4389b942923edb005, type: 2}
     - target: {fileID: 9055599286513668442, guid: 358c95d6d7539be47bd226fdb68fad84, type: 3}
       propertyPath: m_text
       value: Mina
@@ -32492,7 +32536,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!4 &1704276355 stripped
 Transform:
@@ -34535,6 +34579,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5189142027513532137, guid: e33293e06862c154b83a247341c9c8a3, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: bad7bc832747e9f4389b942923edb005, type: 2}
     - target: {fileID: 6778632355985981360, guid: e33293e06862c154b83a247341c9c8a3, type: 3}
       propertyPath: m_text
       value: 3
@@ -34649,7 +34697,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!4 &1793104049 stripped
 Transform:
