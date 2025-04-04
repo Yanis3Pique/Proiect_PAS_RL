@@ -6,6 +6,7 @@ TagManager:
   tags:
   - RedGoalCollider
   - BlueGoalCollider
+  - Ball
   layers:
   - Default
   - TransparentFX
