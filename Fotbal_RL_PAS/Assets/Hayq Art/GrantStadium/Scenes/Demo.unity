@@ -5804,6 +5804,59 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &273954323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 273954324}
+  - component: {fileID: 273954325}
+  m_Layer: 0
+  m_Name: GoalDetector
+  m_TagString: RedGoalCollider
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &273954324
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273954323}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.000000059604645}
+  m_LocalPosition: {x: -0.027194843, y: 0, z: 1.2194355}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1165720263}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &273954325
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273954323}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.241859, y: 2.2325444, z: 0.07040888}
+  m_Center: {x: 0.031548336, y: 0.16950864, z: -0.4648162}
 --- !u!1001 &277163245
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17996,7 +18049,10 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 1dc9492e8697fa048bf58d1bedab71ff, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3768377780570565089, guid: b6f740a532f8a414290e9ee829ad43d5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1846164390}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f740a532f8a414290e9ee829ad43d5, type: 3}
 --- !u!4 &943941714 stripped
@@ -21990,7 +22046,10 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: fe6027db005e47d4e95f5b5a46395073, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3768377780570565089, guid: b6f740a532f8a414290e9ee829ad43d5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 273954324}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f740a532f8a414290e9ee829ad43d5, type: 3}
 --- !u!4 &1165720263 stripped
@@ -33140,6 +33199,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 858747514885235253, guid: 795929fbd2abb1f46bb4b881b5edae5b, type: 3}
   m_PrefabInstance: {fileID: 1845475723}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1846164389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1846164390}
+  - component: {fileID: 1846164391}
+  m_Layer: 0
+  m_Name: GoalDetector
+  m_TagString: RedGoalCollider
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1846164390
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846164389}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2.224}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 943941714}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1846164391
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846164389}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.241859, y: 2.2325444, z: 0.07040888}
+  m_Center: {x: 0.031548336, y: 0.16950864, z: -0.4648162}
 --- !u!1001 &1856398938
 PrefabInstance:
   m_ObjectHideFlags: 0
