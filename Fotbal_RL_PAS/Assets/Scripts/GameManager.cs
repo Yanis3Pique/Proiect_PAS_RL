@@ -1,139 +1,172 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
-using System.Collections;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject ball;
-    [SerializeField]
-    private Transform ballStartPosition;
-    [SerializeField]
-    private List<PlayerAgent> redTeamPlayers;
-    [SerializeField]
-    private List<PlayerAgent> blueTeamPlayers;
+	[Header("Game Objects")]
+	[SerializeField] private GameObject ball;
+	[SerializeField] private Transform ballStartPosition;
+	[SerializeField] private List<PlayerAgent> redTeamPlayers;
+	[SerializeField] private List<PlayerAgent> blueTeamPlayers;
 
-    private SimpleMultiAgentGroup redTeamGroup;
-    private SimpleMultiAgentGroup blueTeamGroup;
+	[Header("UI Elements")]
+	[SerializeField] private TextMeshProUGUI scoreText;
+	[SerializeField] private TextMeshProUGUI timerText;
 
-    public static PlayerAgent lastTouchedAgent;
+	[Header("Game Settings")]
+	[SerializeField] private float gameDuration = 90f;
 
-    private int redTeamScore = 0;
-    private int blueTeamScore = 0;
+	private float gameTimer = 0f;
+	private SimpleMultiAgentGroup redTeamGroup;
+	private SimpleMultiAgentGroup blueTeamGroup;
 
-    private float stuckTimer = 0f;
-    private const float checkInterval = 1f;
-    private const float stuckThreshold = 2f;
-    private Vector3 lastBallPosition;
+	public static PlayerAgent lastTouchedAgent;
 
-    private void Start()
-    {
-        redTeamGroup = new SimpleMultiAgentGroup();
-        blueTeamGroup = new SimpleMultiAgentGroup();
+	private int redTeamScore = 0;
+	private int blueTeamScore = 0;
+	private bool gameOver = false;
 
-        foreach (var player in redTeamPlayers)
-        {
-            redTeamGroup.RegisterAgent(player);
-        }
+	private float stuckTimer = 0f;
+	private const float checkInterval = 1f;
+	private const float stuckThreshold = 2f;
+	private Vector3 lastBallPosition;
 
-        foreach (var player in blueTeamPlayers)
-        {
-            blueTeamGroup.RegisterAgent(player);
-        }
+	private void Start()
+	{
+		redTeamGroup = new SimpleMultiAgentGroup();
+		blueTeamGroup = new SimpleMultiAgentGroup();
 
-        lastBallPosition = ball.transform.position;
-        StartCoroutine(CheckBallStuck());
-    }
+		foreach (var player in redTeamPlayers)
+		{
+			redTeamGroup.RegisterAgent(player);
+		}
 
-    private IEnumerator CheckBallStuck()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(checkInterval);
+		foreach (var player in blueTeamPlayers)
+		{
+			blueTeamGroup.RegisterAgent(player);
+		}
 
-            float distance = Vector3.Distance(ball.transform.position, lastBallPosition);
+		lastBallPosition = ball.transform.position;
 
-            //Debug.Log("DISTANTA: " + distance);
+		UpdateScoreUI();
+		UpdateTimerUI();
 
-            if (distance < 3f)
-            {
-                stuckTimer += checkInterval;
-            }
-            else
-            {
-                stuckTimer = 0f;
-            }
+		StartCoroutine(CheckBallStuck());
+		StartCoroutine(GameTimerRoutine());
+	}
 
-            lastBallPosition = ball.transform.position;
+	private IEnumerator CheckBallStuck()
+	{
+		while (true)
+		{
+			yield return new WaitForSeconds(checkInterval);
 
-            if (stuckTimer >= stuckThreshold)
-            {
-                redTeamGroup.AddGroupReward(-0.75f);
-                blueTeamGroup.AddGroupReward(-0.75f);
-                //Debug.Log("⚠️ Penalizare: mingea a stat blocată prea mult timp");
-                stuckTimer = 0f;
-            }
-        }
-    }
+			float distance = Vector3.Distance(ball.transform.position, lastBallPosition);
+			stuckTimer = (distance < 3f) ? stuckTimer + checkInterval : 0f;
+			lastBallPosition = ball.transform.position;
 
-    public void ResetGame()
-    { 
-        ball.transform.position = ballStartPosition.position;
-        ball.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
-        ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+			if (stuckTimer >= stuckThreshold)
+			{
+				redTeamGroup.AddGroupReward(-0.75f);
+				blueTeamGroup.AddGroupReward(-0.75f);
+				stuckTimer = 0f;
+			}
+		}
+	}
 
-        GameManager.lastTouchedAgent = null;
-    }
+	private IEnumerator GameTimerRoutine()
+	{
+		gameTimer = 0f;
+		gameOver = false;
 
-    public void OnGoalScored(string goalTag)
-    {
-        if (goalTag == "BlueGoalCollider")
-        {
-            redTeamGroup.AddGroupReward(1.0f);
-            redTeamScore += 1;
+		while (gameTimer < gameDuration)
+		{
+			UpdateTimerUI();
+			yield return new WaitForSeconds(1f);
+			gameTimer += 1f;
+		}
 
-            blueTeamGroup.AddGroupReward(-1.0f);
+		// Game over
+		gameOver = true;
+		UpdateTimerUI(); // Will show FINAL
+		redTeamGroup.EndGroupEpisode();
+		blueTeamGroup.EndGroupEpisode();
+		ResetGame();
+	}
 
-            if (GameManager.lastTouchedAgent != null && blueTeamPlayers.Contains(GameManager.lastTouchedAgent))
-            {
-                GameManager.lastTouchedAgent.AddReward(-1.0f);
-            }
+	public void OnGoalScored(string goalTag)
+	{
+		if (goalTag == "BlueGoalCollider")
+		{
+			redTeamGroup.AddGroupReward(1.0f);
+			redTeamScore += 1;
+			blueTeamGroup.AddGroupReward(-1.0f);
 
-            if (blueTeamScore - redTeamScore >= 2)
-            {
-                redTeamGroup.AddGroupReward(-0.5f);
-            }
-        }
-        else if (goalTag == "RedGoalCollider")
-        {
-            blueTeamGroup.AddGroupReward(1.0f);
-            blueTeamScore += 1;
-            redTeamGroup.AddGroupReward(-1.0f);
+			if (lastTouchedAgent != null && blueTeamPlayers.Contains(lastTouchedAgent))
+				lastTouchedAgent.AddReward(-1.0f);
+		}
+		else if (goalTag == "RedGoalCollider")
+		{
+			blueTeamGroup.AddGroupReward(1.0f);
+			blueTeamScore += 1;
+			redTeamGroup.AddGroupReward(-1.0f);
 
-            if (GameManager.lastTouchedAgent != null && redTeamPlayers.Contains(GameManager.lastTouchedAgent))
-            {
-                GameManager.lastTouchedAgent.AddReward(-1.0f);
-            }
+			if (lastTouchedAgent != null && redTeamPlayers.Contains(lastTouchedAgent))
+				lastTouchedAgent.AddReward(-1.0f);
+		}
 
-            if (redTeamScore - blueTeamScore >= 2)
-            {
-                blueTeamGroup.AddGroupReward(-0.5f);
-            }
-        }
+		redTeamGroup.EndGroupEpisode();
+		blueTeamGroup.EndGroupEpisode();
 
-        redTeamGroup.EndGroupEpisode();
-        blueTeamGroup.EndGroupEpisode();
+		UpdateScoreUI();
+		ResetGame();
+	}
 
+	private void ResetGame()
+	{
+		ball.transform.position = ballStartPosition.position;
+		Rigidbody rb = ball.GetComponent<Rigidbody>();
+		rb.linearVelocity = Vector3.zero;
+		rb.angularVelocity = Vector3.zero;
+		lastTouchedAgent = null;
+	}
 
-        ResetGame();
-    }
+	private void UpdateScoreUI()
+	{
+		if (scoreText != null)
+			scoreText.text = $"{blueTeamScore}   -   {redTeamScore}";
+	}
 
-    public (int myScore, int opponentScore) GetTeamScore(int teamID)
-    {
-        if (teamID == 1) 
-            return (redTeamScore, blueTeamScore);
-        else 
-            return (blueTeamScore, redTeamScore);
-    }
+	private void UpdateTimerUI()
+	{
+		if (timerText != null)
+		{
+			if (gameTimer >= gameDuration)
+			{
+				timerText.text = "FINAL";
+			}
+			else
+			{
+				int secondsLeft = Mathf.RoundToInt(gameDuration - gameTimer);
+				int minutes = secondsLeft / 60;
+				int seconds = secondsLeft % 60;
+				timerText.text = $"{minutes:00}:{seconds:00}";
+			}
+		}
+	}
+
+	public (int myScore, int opponentScore) GetTeamScore(int teamID)
+	{
+		return (teamID == 1)
+			? (redTeamScore, blueTeamScore)
+			: (blueTeamScore, redTeamScore);
+	}
+
+	public bool IsGameOver()
+	{
+		return gameOver;
+	}
 }

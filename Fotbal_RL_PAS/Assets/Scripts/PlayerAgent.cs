@@ -58,22 +58,24 @@ public class PlayerAgent : Agent
         rb.angularVelocity = Vector3.zero;
     }
 
-    public override void OnActionReceived(ActionBuffers actions)
-    {
-        float moveZ = actions.ContinuousActions[0];
-        float moveX = actions.ContinuousActions[1];
-        float rotate = actions.ContinuousActions[2];
+	public override void OnActionReceived(ActionBuffers actions)
+	{
+		if (GameManagerIsOver()) return;
 
-        Vector3 moveDir = new Vector3(moveX, 0f, moveZ).normalized;
-        Vector3 move = transform.TransformDirection(moveDir) * moveSpeed * Time.fixedDeltaTime;
+		float moveZ = actions.ContinuousActions[0];
+		float moveX = actions.ContinuousActions[1];
+		float rotate = actions.ContinuousActions[2];
 
-        rb.MovePosition(rb.position + move);
+		Vector3 moveDir = new Vector3(moveX, 0f, moveZ).normalized;
+		Vector3 move = transform.TransformDirection(moveDir) * moveSpeed * Time.fixedDeltaTime;
 
-        Quaternion deltaRot = Quaternion.Euler(0f, rotate * rotationSpeed * Time.fixedDeltaTime, 0f);
-        rb.MoveRotation(rb.rotation * deltaRot);
-    }
+		rb.MovePosition(rb.position + move);
 
-    public override void CollectObservations(VectorSensor sensor)
+		Quaternion deltaRot = Quaternion.Euler(0f, rotate * rotationSpeed * Time.fixedDeltaTime, 0f);
+		rb.MoveRotation(rb.rotation * deltaRot);
+	}
+
+	public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation((ball.position - transform.position).normalized);
         sensor.AddObservation(Vector3.Distance(transform.position, ball.position));
@@ -109,4 +111,8 @@ public class PlayerAgent : Agent
         ca[2] = k.eKey.isPressed ? 1f : k.qKey.isPressed ? -1f : 0f;
     }
 
+	private bool GameManagerIsOver()
+	{
+		return gameManager != null && gameManager.IsGameOver();
+	}
 }
