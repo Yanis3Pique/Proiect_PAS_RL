@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerAgent : Agent
 {
     [SerializeField]
-    private int teamID;
+    public int teamID;
 
     [SerializeField]
     private Transform ball;
@@ -24,15 +24,19 @@ public class PlayerAgent : Agent
 
     private Rigidbody rb;
 
+    [SerializeField]
+    private GameManager gameManager;
+
 
     [SerializeField] 
-    private Transform ownGoal;
-    [SerializeField] 
-    private Transform adversaryGoal;
+    public Transform ownGoal;
+    [SerializeField]
+    public Transform adversaryGoal;
 
 
     public override void Initialize()
     {
+        MaxStep = 5000;
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
@@ -77,6 +81,13 @@ public class PlayerAgent : Agent
 
         sensor.AddObservation(ownGoal.position - transform.position);
         sensor.AddObservation(adversaryGoal.position - transform.position);
+
+        (float myScore, float opponentScore) =  gameManager.GetTeamScore(teamID);
+        float total = myScore + opponentScore;
+        float normalizedDiff = total > 0 ? (myScore - opponentScore) / total : 0f;
+
+        sensor.AddObservation(normalizedDiff);
+
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
