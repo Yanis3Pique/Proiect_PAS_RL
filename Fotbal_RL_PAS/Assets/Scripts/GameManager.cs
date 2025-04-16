@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private Transform ballStartPosition;
 	[SerializeField] private List<PlayerAgent> redTeamPlayers;
 	[SerializeField] private List<PlayerAgent> blueTeamPlayers;
+	[SerializeField] private GameObject resetButton;
 
 	[Header("UI Elements")]
 	[SerializeField] private TextMeshProUGUI scoreText;
@@ -82,6 +83,9 @@ public class GameManager : MonoBehaviour
 		gameTimer = 0f;
 		gameOver = false;
 
+		if (resetButton != null)
+			resetButton.SetActive(false);
+
 		while (gameTimer < gameDuration)
 		{
 			UpdateTimerUI();
@@ -91,6 +95,10 @@ public class GameManager : MonoBehaviour
 
 		// Game over
 		gameOver = true;
+
+		if (resetButton != null)
+			resetButton.SetActive(true);
+
 		UpdateTimerUI(); // Will show FINAL
 		redTeamGroup.EndGroupEpisode();
 		blueTeamGroup.EndGroupEpisode();
@@ -156,6 +164,27 @@ public class GameManager : MonoBehaviour
 				timerText.text = $"{minutes:00}:{seconds:00}";
 			}
 		}
+	}
+
+	public void ResetFullGame()
+	{
+		StopAllCoroutines();
+
+		gameOver = false;
+		gameTimer = 0f;
+		redTeamScore = 0;
+		blueTeamScore = 0;
+		lastTouchedAgent = null;
+
+		if (resetButton != null)
+			resetButton.SetActive(false);
+
+		UpdateScoreUI();
+		UpdateTimerUI();
+		ResetGame();
+
+		StartCoroutine(CheckBallStuck());
+		StartCoroutine(GameTimerRoutine());
 	}
 
 	public (int myScore, int opponentScore) GetTeamScore(int teamID)
